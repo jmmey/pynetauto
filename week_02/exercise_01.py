@@ -39,7 +39,7 @@ nxos2 = {
 
 net_connect = ConnectHandler(**cisco3)
 
-command = 'delete flash:/john_test4.txt'
+command = 'delete flash:/john_test1.txt'
 
 net_connect.send_command(command, expect_string=r'Delete filename')
 net_connect.send_command('\n', expect_string=r'confirm')

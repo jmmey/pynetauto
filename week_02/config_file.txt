@@ -1,0 +1,3 @@
+clock timezone CST -6
+logging buffered 10003
+ip ftp source-interface GigabitEthernet0/0/1

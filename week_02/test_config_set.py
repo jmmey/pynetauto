@@ -11,15 +11,15 @@ cisco3 = {
     'device_type': 'cisco_ios',
     'host': 'cisco3.lasthop.io',
     'username': my_user, 
-    'password': my_pass
+    'password': my_pass,
+    'session_log': 'cisco3_session.txt'
     }
 
 cisco4 = {
     'device_type': 'cisco_ios',
     'host': 'cisco4.lasthop.io',
     'username': my_user, 
-    'password': my_pass,
-    'session_log': 'cisco4_session.txt'
+    'password': my_pass
     }
 
 nxos1 = {
@@ -36,10 +36,21 @@ nxos2 = {
     'password': my_pass
     }
 
+# Netmiko Connections
+net_connect = ConnectHandler(**cisco3)
 
-net_connect = ConnectHandler(**cisco4)
+# cfg = 'logging buffered 10001'
 
-output = net_connect.send_command('show run', use_textfsm=True)
-print(output) 
+# cfg = ['logging buffered 10002', 
+#    'clock timezone PDT -7', 
+#   'ip ftp source-interface gigabitEthernet 0/0/0'
+#]
 
+
+# output = net_connect.send_config_set(cfg)
+
+output = net_connect.send_config_from_file(config_file='config_file.txt')
+print(output)
+
+# Graceful Disconnect
 net_connect.disconnect()

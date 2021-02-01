@@ -19,7 +19,8 @@ cisco4 = {
     'device_type': 'cisco_ios',
     'host': 'cisco4.lasthop.io',
     'username': my_user, 
-    'password': my_pass
+    'password': my_pass,
+    'session_log': 'cisco4_session.txt'
     }
 
 nxos1 = {
@@ -36,7 +37,7 @@ nxos2 = {
     'password': my_pass
     }
 
-ios_devices = [cisco3, cisco3]
+ios_devices = [cisco3, cisco4]
 command = 'delete flash:/john_test*.txt'
 
 for device in ios_devices:
@@ -46,3 +47,4 @@ for device in ios_devices:
     net_connect.send_command_timing('y')
     # Graceful Disconnect
     net_connect.disconnect()
+
