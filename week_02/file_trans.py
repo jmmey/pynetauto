@@ -39,8 +39,18 @@ nxos2 = {
 # Netmiko Connections
 net_connect = ConnectHandler(**cisco3)
 
-output = net_connect.send_command('sh ip int bri', delay_factor=10)
+# cfg = 'logging buffered 10001'
+
+# cfg = ['logging buffered 10002', 
+#    'clock timezone PDT -7', 
+#   'ip ftp source-interface gigabitEthernet 0/0/0'
+#]
+
+
+# output = net_connect.send_config_set(cfg)
+
+output = net_connect.send_config_from_file(config_file='config_file.txt')
 print(output)
 
 # Graceful Disconnect
-# net_connect.disconnect()
+net_connect.disconnect()
