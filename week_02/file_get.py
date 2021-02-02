@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from netmiko import ConnectHandler
+from netmiko import ConnectHandler, file_transfer
 from getpass import getpass
 
 my_user = input('Username: ') 
@@ -36,11 +36,23 @@ nxos2 = {
     'password': my_pass
     }
 
-# Netmiko Connections
-net_connect = ConnectHandler(**cisco3)
+source_file = 'john_testy.txt'
+dest_file = 'john_testyyy.txt'
+direction = 'get'
+file_system = 'flash:'
 
-output = net_connect.send_command('sh ip int bri', delay_factor=10, use_textfsm=True)
-print(output)
+# Create the Netmiko SSH connection
+ssh_conn = ConnectHandler(**cisco3)
+# Make the file transfer happen
+transfer_dict = file_transfer(
+    ssh_conn,
+    source_file=source_file,
+    dest_file=dest_file,
+    file_system=file_system,
+    direction=direction,
+    overwrite_file=True
+)
 
-# Graceful Disconnect
-# net_connect.disconnect()
+print(transfer_dict)
+
+ssh_conn.disconnect()
