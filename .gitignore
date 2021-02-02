@@ -132,4 +132,4 @@ dmypy.json
 *_session.txt
 
 # Test Files
-_test*.txt
+*_test*.txt
