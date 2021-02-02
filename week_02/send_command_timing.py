@@ -46,4 +46,4 @@ net_connect.send_command_timing('\n')
 net_connect.send_command_timing('y')
 
 # Graceful Disconnect
-#net_connect.disconnect()
+net_connect.disconnect()

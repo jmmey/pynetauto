@@ -46,4 +46,4 @@ net_connect.send_command('\n', expect_string=r'confirm')
 net_connect.send_command('y', expect_string=r'#')
 
 # Graceful Disconnect
-#net_connect.disconnect()
+net_connect.disconnect()
