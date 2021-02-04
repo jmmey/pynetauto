@@ -53,18 +53,8 @@ output += net_connect.send_command('\n', expect_string=r':', strip_prompt=False,
 output += net_connect.send_command('\n', expect_string=r':', strip_prompt=False, strip_command=False)
 output += net_connect.send_command('\n', expect_string=r'#', strip_prompt=False, strip_command=False)
 
-# output = net_connect.send_command_timing('ping')
-# output += net_connect.send_command_timing('\n')
-# output += net_connect.send_command_timing('8.8.8.8')
-# output += net_connect.send_command_timing('\n')
-# output += net_connect.send_command_timing('\n')
-# output += net_connect.send_command_timing('\n')
-# output += net_connect.send_command_timing('\n')
-# output += net_connect.send_command_timing('\n')
-
 net_connect.disconnect()
 
 print()
 print(output)
 print()
-
