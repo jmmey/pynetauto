@@ -5,9 +5,7 @@ from netmiko import ConnectHandler
 from getpass import getpass
 from pprint import pprint
 
-# my_user = input('Username: ') 
 my_user = 'pyclass'
-# my_pass = getpass()
 my_pass = os.getenv('PYNET_PASSWORD') if os.getenv('PYNET_PASSWORD') else getpass()
 
 # Device Dictionaries
@@ -23,7 +21,8 @@ cisco4 = {
     'device_type': 'cisco_ios',
     'host': 'cisco4.lasthop.io',
     'username': my_user, 
-    'password': my_pass
+    'password': my_pass,
+    'session_log': 'cisco4_session.txt'
     }
 
 nxos1 = {
