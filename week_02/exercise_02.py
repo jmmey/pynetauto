@@ -41,12 +41,17 @@ nxos2 = {
     }
 
 
-net_connect = ConnectHandler(**nxos2)
+nxos_switches = [nxos1, nxos2]
 
-output = net_connect.send_command('show lldp neighbors detail')
+for each in nxos_switches:
+    net_connect = ConnectHandler(**each)
+    output = net_connect.send_command('show lldp neighbors detail')
+    print('#' * 25)
+    print(output)
+    print('#' * 25)
 
 net_connect.disconnect()
 
-print()
-print(output)
-print()
+# print()
+# print(output)
+# print()
