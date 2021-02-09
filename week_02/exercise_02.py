@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import os
+from datetime import datetime
 from netmiko import ConnectHandler
 from getpass import getpass
 from pprint import pprint
@@ -40,18 +41,26 @@ nxos2 = {
     'global_delay_factor': 2
     }
 
+net_connect = ConnectHandler(**nxos2)
 
-nxos_switches = [nxos1, nxos2]
+print(datetime.now())
+print('-' * 35)
 
-for each in nxos_switches:
-    net_connect = ConnectHandler(**each)
-    output = net_connect.send_command('show lldp neighbors detail')
-    print('#' * 25)
-    print(output)
-    print('#' * 25)
+output = net_connect.send_command('show lldp neighbors detail')
+
+print(datetime.now())
+print('-' * 35)
+
+
+print(datetime.now())
+print('-' * 35)
+
+output2 = net_connect.send_command(
+    'show lldp neighbors detail',
+    delay_factor=8
+)
+
+print(datetime.now())
+print('-' * 35)
 
 net_connect.disconnect()
-
-# print()
-# print(output)
-# print()
