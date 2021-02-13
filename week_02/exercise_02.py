@@ -43,15 +43,18 @@ nxos2 = {
 
 net_connect = ConnectHandler(**nxos2)
 
+print('******** TEST 1 **********')
 print(datetime.now())
 print('-' * 35)
 
 output = net_connect.send_command('show lldp neighbors detail')
+print(output)
 
 print(datetime.now())
 print('-' * 35)
 
 
+print('******** TEST 2 **********')
 print(datetime.now())
 print('-' * 35)
 
@@ -59,6 +62,7 @@ output2 = net_connect.send_command(
     'show lldp neighbors detail',
     delay_factor=8
 )
+print(output2)
 
 print(datetime.now())
 print('-' * 35)
