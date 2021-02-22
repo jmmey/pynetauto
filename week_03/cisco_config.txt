@@ -1,0 +1,20 @@
+interface GigabitEthernet0/0/0
+ ip address 10.220.88.23 255.255.255.0
+ negotiation auto
+!
+interface GigabitEthernet0/0/1
+ no ip address
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+no ip http server
+no ip http secure-server
+ip route 0.0.0.0 0.0.0.0 10.220.88.1
+ip ssh version 2
+ip ssh pubkey-chain
+  username testuser
+   key-hash ssh-rsa E5D7E26A603DD18923113E45F29BDF22
+  username student1
+   key-hash ssh-rsa 1C3A949CF3B48F23F5074717EEEE025A
+ip scp server enable
