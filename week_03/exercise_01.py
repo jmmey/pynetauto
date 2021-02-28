@@ -17,3 +17,11 @@ arp_lines = arp_data.splitlines()
 
 processed_list = []
 
+for arp in arp_lines:
+    if re.search(r'^Protocol.*Interface', arp):
+        continue
+    _, ip_addr, _, mac_addr, _, interface = arp.split()
+    arp_dict = {'mac_addr': mac_addr, 'ip_addr': ip_addr, 'interface': interface}
+    processed_list.append(arp_dict)
+
+pprint(processed_list) 
