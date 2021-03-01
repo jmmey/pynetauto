@@ -34,3 +34,8 @@ for device in lab_devices:
 print()
 pprint(lab_devices)
 print()
+
+filename = 'output.yml'
+
+with open(filename, 'w') as f:
+    yaml.dump(lab_devices, f, default_flow_style=False)
