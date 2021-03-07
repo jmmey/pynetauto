@@ -28,17 +28,21 @@ router bgp 44
    route-policy ALLOW out
 """
 
-xr_conf = xr_conf.splitlines()
-parse_conf = CiscoConfParse(xr_conf)
-bgp_sec = parse_conf.find_objects_w_child(
-    parentspec=r'^router bgp', childspec=r'\s+neighbor\s+\d+'
+parse_conf = CiscoConfParse(xr_conf.splitlines())
+neighbors = parse_conf.find_objects_w_parents(
+    parentspec=r'router bgp', childspec=r'neighbor'
 )
-
-bgp_sec = bgp_sec[0]
-bgp_nei = bgp_sec.re_search_children(r'neighbor')
 
 bgp_peers = []
 
-for peer in bgp_nei:
-    print(peer.text)
-    break
+for neighbor in neighbors:
+    _, ip_addr = neighbor.text.split()
+    for as_num in neighbor.children:
+        if 'remote-as' in as_num.text:
+            _, as_number = as_num.text.split()
+    bgp_peers.append((ip_addr, as_number))
+
+print()
+print('BGP Peers:')
+print(bgp_peers)
+print()
