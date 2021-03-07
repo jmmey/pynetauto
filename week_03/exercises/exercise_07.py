@@ -30,7 +30,9 @@ router bgp 44
 
 xr_conf = xr_conf.splitlines()
 parse_conf = CiscoConfParse(xr_conf)
-bgp_sec = parse_conf.find_objects_w_child(parentspec=r'^router bgp', childspec=r'\s+neighbor\s+\d+')
+bgp_sec = parse_conf.find_objects_w_child(
+    parentspec=r'^router bgp', childspec=r'\s+neighbor\s+\d+'
+)
 
 bgp_sec = bgp_sec[0]
 bgp_nei = bgp_sec.re_search_children(r'neighbor')
