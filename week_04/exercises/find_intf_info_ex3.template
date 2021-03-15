@@ -1,0 +1,26 @@
+Value INTF_NAME (\w+\d{1,3}.\d{1,3})
+Value LINE_STATUS (\w+)
+Value ADMIN_STATE (\w+)
+Value MAC_ADDR ([0-9a-f\.]+[0-9a-f\.]+[0-9a-f]) 
+# Value MAC_ADDR (.+\..+\..+)
+Value MTU (\d+)
+Value DUPLEX (\w+-\w+)
+Value SPEED (\d+)
+
+Start
+  # ^${INTF_NAME}.+$$ -> Record
+  ^${INTF_NAME}\s+\w+\s+${LINE_STATUS}*$$ -> AdminState
+
+AdminState
+  ^admin state is\s+${ADMIN_STATE},.+$$ -> HardwareLine
+
+HardwareLine
+  ^\s+Hardware:.+address:\s+${MAC_ADDR}.+$$ -> MTULine
+
+MTULine
+  ^\s+MTU\s+${MTU}.+$$ -> DupSpeed
+
+DupSpeed
+  ^\s+${DUPLEX},\s+${SPEED}.+$$ -> Record
+
+EOF

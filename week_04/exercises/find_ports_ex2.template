@@ -1,0 +1,15 @@
+# Variables
+Value PORT_NAME (Gi\d\/\d\/\d)
+Value STATUS (\w*connect\w*)
+Value VLAN (\d+)
+Value DUPLEX (\w+)
+Value SPEED (\w+)
+Value PORT_TYPE (\d+\D\d+\D\d+\w+)
+
+Start
+  ^Port.*Type\s*$$ -> GetPortNames
+
+GetPortNames
+  ^${PORT_NAME}\s+${STATUS}\s+${VLAN}\s+${DUPLEX}\s+${SPEED}\s+${PORT_TYPE}\s* -> Record
+
+EOF

@@ -1,0 +1,10 @@
+# Variables
+Value PORT_NAME (Gi\d\/\d\/\d)
+
+Start
+  ^Port.*Type\s*$$ -> GetPortNames
+
+GetPortNames
+  ^${PORT_NAME} -> Record
+
+EOF
