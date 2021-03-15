@@ -8,7 +8,6 @@ Value DUPLEX (\w+-\w+)
 Value SPEED (\d+)
 
 Start
-  # ^${INTF_NAME}.+$$ -> Record
   ^${INTF_NAME}\s+\w+\s+${LINE_STATUS}*$$ -> AdminState
 
 AdminState
