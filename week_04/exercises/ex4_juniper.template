@@ -1,0 +1,11 @@
+Value MAC_ADDR (\w+|\d+:\w+|\d+:\w+|\d+:\w+|\d+:\w+|\d+:\w+|\d+)
+Value ADDRESS (\d+{1,3}.\d+{1,3}.\d+{1,3}.\d+{1,3})
+Value NAME (\d+{1,3}.\d+{1,3}.\d+{1,3}.\d+{1,3})
+Value INTF (\w+.\d+)
+
+Start
+  ^MAC.+Flags\s*$$ -> FindInfo
+
+FindInfo
+  # ^${MAC_ADDR}\s+${ADDRESS}\s+${NAME}\s+${INTF} -> Record
+  ^${MAC_ADDR}\s+ -> Record
