@@ -2,6 +2,15 @@
 interface {{ nxos1_intf }}
  ip address {{ nxos1_ip }}/{{ nxos1_mask }}
 
+router bgp {{ bgp_as }}
+ neighbor {{ nxos1_nei_ip }} remote-as {{ remote_as }}
+   address-family ipv4 unicast
+
 ! nxos2
 interface {{ nxos2_intf }}
  ip address {{ nxos2_ip }}/{{ nxos2_mask }}
+
+router bgp {{ bgp_as }}
+ neighbor {{ nxos2_nei_ip }} remote-as {{ remote_as }}
+   address-family ipv4 unicast
+
