@@ -31,7 +31,7 @@ if __name__ == '__main__':
         'remote_as': '22'
     }
     
-    # Add Jinja2 vars to the Netmiko dictionary to if/then isn't needed
+    # Add Jinja2 vars to the Netmiko dictionary so if/then isn't needed
     nxos1['j2_vars'] = nxos1_vars 
     nxos2['j2_vars'] = nxos2_vars 
 
@@ -46,3 +46,7 @@ if __name__ == '__main__':
         cfg = template.render(**j2_vars)
         # Print out some lines so the user knows what is happening
         device_name = temp_device['j2_vars']['device_name']
+        print(f' {device_name}'.center(80, '#'))
+        print(f'\n>>> Template ouput {device_name}')
+        print(cfg)
+         
