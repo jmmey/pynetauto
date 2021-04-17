@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import time
 import re
 
@@ -5,7 +7,7 @@ from jinja2 import FileSystemLoader, StrictUndefined
 from jinja2.environment import Environment
 
 from netmiko import ConnectHandler
-import my_devices import nxos1, nxos2
+from my_devices import nxos1, nxos2
 
 if __name__ == '__main__':
     env = Environment(undefined=StrictUndefined)
@@ -39,14 +41,14 @@ if __name__ == '__main__':
     for device in (nxos1, nxos2): 
         # Create a copy so the dictionary can be modified
         tmp_device = device.copy()
-        j2_vars = temp_device.pop('j2_vars') 
+        j2_vars = tmp_device.pop('j2_vars') 
         # Define the jina2 template file and create template obj
         template_file = 'nxos_config.j2'
         template = env.get_template(template_file)
         cfg = template.render(**j2_vars)
         # Print out some lines so the user knows what is happening
-        device_name = temp_device['j2_vars']['device_name']
+        device_name = tmp_device['j2_vars']['device_name']
         print(f' {device_name}'.center(80, '#'))
         print(f'\n>>> Template ouput {device_name}')
         print(cfg)
-         
+        break 
