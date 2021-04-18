@@ -47,8 +47,20 @@ if __name__ == '__main__':
         template = env.get_template(template_file)
         cfg = template.render(**j2_vars)
         # Print out some lines so the user knows what is happening
-        device_name = tmp_device['j2_vars']['device_name']
-        print(f' {device_name}'.center(80, '#'))
-        print(f'\n>>> Template ouput {device_name}')
+        device_name = device['j2_vars']['device_name']
+        print(f' {device_name} '.center(60, '#'))
+        print(f'\n>>> Template ouput {device_name}\n')
         print(cfg)
-        break 
+        # Create list of config lines
+        cfg_lines = [cfg.strip() for cfg in cfg.splitlines()]
+       
+        # Establish Netmiko connection
+        net_connect = ConnectHandler(**tmp_device)
+        # Store connection for later 
+        device['ssh_conn'] = net_connect
+        # Configure device
+        print(f'>>> Configuring {device_name}')
+        output = net_connect.send_config_set(cfg_lines)
+        print(output)
+        print('\n\n')
+        
