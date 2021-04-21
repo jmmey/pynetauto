@@ -6,14 +6,14 @@ password = os.getenv("PYNET_PASSWORD") if os.getenv("PYNET_PASSWORD") else getpa
 
 nxos1 = {
     'device_type': 'cisco_nxos',
-    'host': 'nxos1.lasthop.ip',
+    'host': 'nxos1.lasthop.io',
     'username': username,
     'password': password
 }
 
 nxos2 = {
     'device_type': 'cisco_nxos',
-    'host': 'nxos2.lasthop.ip',
+    'host': 'nxos2.lasthop.io',
     'username': username,
     'password': password
 }
