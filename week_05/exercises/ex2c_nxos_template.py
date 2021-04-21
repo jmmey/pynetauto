@@ -63,4 +63,43 @@ if __name__ == '__main__':
         output = net_connect.send_config_set(cfg_lines)
         print(output)
         print('\n\n')
+       
+    # Delay for BGP state to establish
+    sleep_time = 15
+    print(f'Sleeping for {sleep_time} seconds')
+    time.sleep(sleep_time)
+
+    print('\n\n')
+    print('>>> Testing ping and BGP')
+    for device in (nxos1,):
+        net_connect = device['ssh_conn']
+        remote_ip = device['j2_vars']['bgp_neighbor_ip']
+
+        # Test ping
+        output = net_connect.send_command(f'ping {remote_ip}')
+        print(output)
+        if '64 bytes from' not in output:
+            print('\nPing failed!')
+        print('\n\n') 
         
+        # Test BGP
+        bgp_verify = f'show ip bgp summary | include {remote_ip}'
+        output = net_connect.send_command(bgp_verify)
+        # Retreive the State/PfxRcd field which is the last field
+        match = re.search(r"\s+(\S+)\s*$", output)
+        prefix_received = match.group(1)
+        try:
+            # If int, the BGP session reached established state
+            int(prefix_received)
+            print(
+                f'BGP reached the established stated. Prefixes recieved {prefix_received}'
+            )
+        except ValueError:
+            print('BGP failed to reach the established state')
+
+    # All done - disconnect on both devices
+    for device in (nxos1, nxos2):
+        net_connect = device['ssh_conn']
+        net_connect.disconnect()
+
+    print('\n\n')
