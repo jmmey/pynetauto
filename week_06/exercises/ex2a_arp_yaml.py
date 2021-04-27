@@ -22,8 +22,11 @@ device = pyeapi.client.Node(connection)
 output = device.enable("show ip arp")
 ip_entries = output[0]['result']['ipV4Neighbors']
 
+print()
 print('IPv4 Address | MAC Address')
 print('-' * 28)
 
 for i in ip_entries:
     print(f"{i['address']} | {i['hwAddress']}") 
+
+print()
