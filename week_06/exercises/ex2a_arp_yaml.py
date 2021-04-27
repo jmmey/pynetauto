@@ -10,7 +10,7 @@ username = os.getenv("PYNET_USER") if os.getenv("PYNET_USER") else input('Userna
 password = os.getenv("PYNET_PASSWORD") if os.getenv("PYNET_PASSWORD") else getpass('Password: ')
 
 with open('inventory.yml', 'r') as f:
-    inventory = yaml.load(f)
+    inventory = yaml.safe_load(f)
 
 inventory = inventory['arista8']
 inventory['username'] = username
