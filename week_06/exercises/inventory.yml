@@ -1,10 +1,4 @@
-#    transport="https",
-#    #    host="arista8.lasthop.io",
-#    #    username=username,
-#    #    password=password,
-#    #    port="443",
-#    #)
-
+---
 arista8:
   host: "arista8.lasthop.io"
   username: username
